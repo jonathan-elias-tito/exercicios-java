@@ -1,0 +1,11 @@
+# Ficheiros compilados
+*.class
+bin/
+
+# Configurações do Eclipse
+.classpath
+.project
+.settings/
+
+# Metadados adicionais
+/.metadata/
