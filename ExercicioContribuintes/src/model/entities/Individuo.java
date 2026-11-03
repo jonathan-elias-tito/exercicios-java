@@ -1,4 +1,4 @@
-package Entidades;
+package model.entities;
 
 public class Individuo extends Contribuinte {
     private Double gastoComSaude;

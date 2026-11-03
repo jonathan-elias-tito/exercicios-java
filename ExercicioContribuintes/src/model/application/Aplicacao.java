@@ -1,12 +1,12 @@
-package Aplicacao;
+package model.application;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Entidades.Contribuinte;
-import Entidades.Empresa;
-import Entidades.Individuo;
+import model.entities.Contribuinte;
+import model.entities.Empresa;
+import model.entities.Individuo;
 
 public class Aplicacao {
 

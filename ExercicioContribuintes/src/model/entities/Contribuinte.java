@@ -1,4 +1,4 @@
-package Entidades;
+package model.entities;
 
 public abstract class Contribuinte {
     private String nome;

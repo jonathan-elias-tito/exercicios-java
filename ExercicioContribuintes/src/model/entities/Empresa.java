@@ -1,4 +1,4 @@
-package Entidades;
+package model.entities;
 
 public class Empresa extends Contribuinte {
     private Integer numeroDeFuncionarios;
