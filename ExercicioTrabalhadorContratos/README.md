@@ -1,28 +1,27 @@
-# 🏨 Exercise: Hotel Reservation System (Custom Exceptions)
+# 📊 Exercício: Sistema de Trabalhador e Contratos (Composição & Enums)
 
-Java project focused on implementing business rule validations through **Custom Exceptions** (`DomainException`).
-
----
-
-## 🎯 Key Concepts Applied
-
-- **Exception Handling:** `try-catch` blocks, multiple `catch` handlers, and `RuntimeException`.
-- **Custom Exceptions:** Created the `DomainException` class to delegate domain business logic validations away from the main application flow.
-- **Date Manipulation:** Modern Java Date & Time API using `java.time.LocalDate` and `DateTimeFormatter`.
-- **Encapsulation & Domain Rules:** Enforced validation logic directly inside entity constructors and methods.
+Projeto em Java focado na modelagem orientada a objetos utilizando **Enumerações**, **Composição de Objetos** e **Listas** para gerir contratos de trabalhadores e calcular ganhos mensais.
 
 ---
 
-## 📌 Business Rules Validated
+## 🎯 Principais Conceitos Aplicados
 
-1. Check-out date must strictly be after the check-in date.
-2. Reservation updates are only allowed for future dates.
-3. If any validation fails, the custom `DomainException` is caught gracefully without breaking or crashing the application.
+- **Enumerações (`enum`):** Categorização de níveis fixos de trabalhadores (`JUNIOR`, `MID_LEVEL`, `SENIOR`).
+- **Composição de Objetos:** Associação de um `Worker` a um `Department` e manutenção de uma `List<HourContract>`.
+- **Manipulação de Datas:** Utilização da API moderna `java.time.LocalDate` e divisão de strings para filtrar contratos por mês e ano.
+- **Encapsulamento e Coleções:** Gestão de comportamentos de domínio, tais como adicionar/remover elementos de listas dentro de classes de entidade.
 
 ---
 
-## 🚀 How to Run
+## 📌 Regras de Negócio Validadas
 
-1. Import the `ExercicioReservaHotel` folder into your IDE (Eclipse, VS Code, or IntelliJ).
-2. Run `application.Program.java`.
-3. Input room number and dates in the `dd/MM/yyyy` format.
+1. Um trabalhador pode ter zero ou vários contratos de horas associados a si.
+2. O ganho total para um mês e ano específicos é calculado somando o salário base do trabalhador à soma de todos os valores de contratos correspondentes exatamente a esse período.
+
+---
+
+## 🚀 Como Executar
+
+1. Importa a pasta `ExercicioContratoTrabalhador` para a tua IDE (Eclipse, VS Code ou IntelliJ).
+2. Executa a classe `application.Program.java`.
+3. Segue as instruções na consola para inserir os detalhes do departamento, informações do trabalhador, contratos e o mês/ano alvo (`MM/AAAA`).

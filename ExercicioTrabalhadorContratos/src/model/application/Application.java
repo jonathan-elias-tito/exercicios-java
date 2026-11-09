@@ -2,49 +2,60 @@ package model.application;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.Locale;
 import java.util.Scanner;
 
-import model.entities.DomainException;
+import model.entities.Department;
+import model.entities.HourContract;
+import model.entities.Worker;
 import model.entities.enums.WorkerLevel;
+
 
 public class Application {
 
     public static void main(String[] args) {
 
+        Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        try {
-            System.out.print("Room number: ");
-            int number = sc.nextInt();
-            System.out.print("Check-in date (dd/MM/yyyy): ");
-            LocalDate checkIn = LocalDate.parse(sc.next(), fmt);
-            System.out.print("Check-out date (dd/MM/yyyy): ");
-            LocalDate checkOut = LocalDate.parse(sc.next(), fmt);
+        System.out.print("Enter department's name: ");
+        String departmentName = sc.nextLine();
+        System.out.println("Enter worker data:");
+        System.out.print("Name: ");
+        String workerName = sc.nextLine();
+        System.out.print("Level (JUNIOR / MID_LEVEL / SENIOR): ");
+        String workerLevel = sc.nextLine();
+        System.out.print("Base salary: ");
+        double baseSalary = sc.nextDouble();
 
-            WorkerLevel workerLevel = new WorkerLevel(number, checkIn, checkOut);
-            System.out.println("WorkerLevel: " + workerLevel);
+        Worker worker = new Worker(workerName, WorkerLevel.valueOf(workerLevel.toUpperCase()), baseSalary, new Department(departmentName));
 
-            System.out.println();
-            System.out.println("Enter data to update the reservation:");
-            System.out.print("Check-in date (dd/MM/yyyy): ");
-            checkIn = LocalDate.parse(sc.next(), fmt);
-            System.out.print("Check-out date (dd/MM/yyyy): ");
-            checkOut = LocalDate.parse(sc.next(), fmt);
+        System.out.print("How many contracts to this worker? ");
+        int n = sc.nextInt();
 
-            workerLevel.updateDates(checkIn, checkOut);
-            System.out.println("WorkerLevel: " + workerLevel);
+        for (int i = 1; i <= n; i++) {
+            System.out.println("Enter contract #" + i + " data:");
+            System.out.print("Date (DD/MM/YYYY): ");
+            LocalDate contractDate = LocalDate.parse(sc.next(), fmt);
+            System.out.print("Value per hour: ");
+            double valuePerHour = sc.nextDouble();
+            System.out.print("Duration (hours): ");
+            int hours = sc.nextInt();
+
+            HourContract contract = new HourContract(contractDate, valuePerHour, hours);
+            worker.addContract(contract);
         }
-        catch (DateTimeParseException e) {
-            System.out.println("Invalid date format.");
-        }
-        catch (DomainException e) {
-            System.out.println("Error in reservation: " + e.getMessage());
-        }
-        catch (RuntimeException e) {
-            System.out.println("Unexpected error.");
-        }
+
+        System.out.println();
+        System.out.print("Enter month and year to calculate income (MM/YYYY): ");
+        String monthAndYear = sc.next();
+        int month = Integer.parseInt(monthAndYear.substring(0, 2));
+        int year = Integer.parseInt(monthAndYear.substring(3));
+
+        System.out.println("Name: " + worker.getName());
+        System.out.println("Department: " + worker.getDepartment().getName());
+        System.out.println("Income for " + monthAndYear + ": " + String.format("%.2f", worker.income(year, month)));
 
         sc.close();
     }
